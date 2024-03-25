@@ -41,7 +41,7 @@ export const CommunityPostPage = () => {
           <Comments user={user?.user} post={post} />
         </>
         <>
-          <SidePostCommunity />
+          {/* <SidePostCommunity /> */}
         </>
       </SecondaryLayout>
     </Layout>

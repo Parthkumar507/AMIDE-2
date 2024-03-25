@@ -7,7 +7,8 @@ const createPost = async (req, res) => {
     const userId = req.user.userId;
 
     if (!(title && content)) {
-      throw new Error("All input required");
+      // throw new Error("All input required");
+      return res.status(404).json({ message: "All input required" });
     }
     const community = await Community.findById(communityId);
 

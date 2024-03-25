@@ -65,6 +65,7 @@ export const PostForm = () => {
       imageUrl: selectedFile,
       communityId: community,
     });
+    console.log('Image Url is ',selectedFile)
     if (!data.error) {
       toast.success("Post created successfully!");
       navigate(`/explore`);

@@ -35,7 +35,7 @@ import {
 } from "@chakra-ui/icons";
 import { GrAdd } from "react-icons/gr";
 import { isLoggedIn, logoutUser } from "../../utils/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsChat } from "react-icons/bs";
 
 export default function Navbar() {
@@ -293,7 +293,8 @@ const DesktopNav = () => {
                 >
                   <Flex alignItems="center">
                     <Icon fontSize={20} mr={2} as={GrAdd} />
-                    Create Community
+                    <Link to="/create-community">Create Community</Link>
+                    
                   </Flex>
                 </MenuItem>
                 {/* {mySnippets.map((snippet) => (

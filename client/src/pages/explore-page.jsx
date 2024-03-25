@@ -84,7 +84,7 @@ export const ExplorePage = () => {
           <Posts posts={posts} setPosts={setPosts} sortType={sortType}/>
         </>
         <Stack gap={4}>
-          <SidePostCommunity />
+          {/* <SidePostCommunity /> */}
           <TopCommunities />
         </Stack>
       </SecondaryLayout>

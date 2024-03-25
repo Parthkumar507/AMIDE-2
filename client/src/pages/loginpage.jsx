@@ -24,14 +24,15 @@ export const LoginPage = () => {
     event.preventDefault();
     if (formError) setFormError("");
     if (!form.email.includes("@")) {
-      return setFormError("Please enter a valid email");
+      toast.error("Please enter a valid email");
+      return
     }
 
     const data = await login(form);
-    // console.log('ON submit Login1 ')
+    console.log('ON submit Login1 ')
 
     if (!data.token) {
-    // console.log('ON submit Login 2')
+    console.log('ON submit Login 2')
 
       toast.error("Something went wrong!");
       setFormError(data.error);
