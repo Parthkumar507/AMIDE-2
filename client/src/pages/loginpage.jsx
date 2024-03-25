@@ -14,7 +14,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [formError, setFormError] = useState("");
@@ -23,13 +23,13 @@ export const LoginPage = () => {
     console.log('ON submit Login ')
     event.preventDefault();
     if (formError) setFormError("");
-    if (!form.email.includes("@")) {
-      toast.error("Please enter a valid email");
-      return
-    }
+    // if (!form.email.includes("@")) {
+    //   toast.error("Please enter a valid email");
+    //   return
+    // }
 
     const data = await login(form);
-    console.log('ON submit Login1 ')
+    // console.log('ON submit Login1 ')
 
     if (!data.token) {
     console.log('ON submit Login 2')
@@ -70,8 +70,8 @@ export const LoginPage = () => {
 
         <form style={{ width: "100%" }} onSubmit={onSubmit}>
           <InputItem
-            name="email"
-            placeholder="email"
+            name="username"
+            placeholder="Username"
             type="text"
             mb={2}
             onChange={onChange}

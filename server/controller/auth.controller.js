@@ -61,13 +61,13 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!(email && password)) {
+    if (!(username && password)) {
       throw new Error("All input required");
     }
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ username: username.toLowerCase() });
 
     if (!user) {
       return res
@@ -80,7 +80,7 @@ const login = async (req, res) => {
     if (!isPasswordValid) {
       return res
         .status(401)
-        .json({ success: false, message: "Invalid email or password." });
+        .json({ success: false, message: "Invalid username or password." });
     }
 
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);

@@ -37,6 +37,8 @@ import { GrAdd } from "react-icons/gr";
 import { isLoggedIn, logoutUser } from "../../utils/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { BsChat } from "react-icons/bs";
+import { SidePostCommunity } from "../community/side-post-community";
+import {CreateCommunityButton} from "../community/createCommunityButton"
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -143,7 +145,7 @@ export default function Navbar() {
                   />
                 )}
               </MenuButton>
-              <MenuList fontSize={"10pt"}>
+              <MenuList fontSize={"10pt"} overflowY={"hidden"}>
                 {/* <MenuItem as={"a"} href={`/users/${user.userId}`}>
                   Profile
                 </MenuItem> */}
@@ -274,7 +276,7 @@ const DesktopNav = () => {
                 <ChevronDownIcon color="gray.500" />
               </Flex>
             </MenuButton>
-            <MenuList maxHeight="300px" overflow="scroll" overflowX="hidden">
+            <MenuList maxHeight="300px" overflow="hidden" overflowX="hidden">
               <Box mt={3} mb={4}>
                 <Text
                   pl={3}
@@ -289,13 +291,14 @@ const DesktopNav = () => {
                   width="100%"
                   fontSize="10pt"
                   _hover={{ bg: "gray.100" }}
-                  // onClick={() => setOpen(true)}
                 >
-                  <Flex alignItems="center">
+                  {/* <Flex alignItems="center">
                     <Icon fontSize={20} mr={2} as={GrAdd} />
                     <Link to="/create-community">Create Community</Link>
                     
-                  </Flex>
+                  </Flex> */}
+                  {/* <SidePostCommunity /> */}
+                  <CreateCommunityButton/>
                 </MenuItem>
                 {/* {mySnippets.map((snippet) => (
                   <MenuListItem

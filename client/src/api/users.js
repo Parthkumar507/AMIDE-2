@@ -29,7 +29,7 @@ const register = async (user) => {
 
 const login = async (user) => {
   try {
-    console.log('1111111')
+    // console.log('1111111')
     const res = await fetch(BASE_URL + "api/auth/login", {
       method: "POST",
       headers: {
@@ -38,7 +38,7 @@ const login = async (user) => {
       },
       body: JSON.stringify(user),
     });
-    console.log('res is ',res)
+    // console.log('res is ',res)
     return await res.json();
   } catch (err) {
     console.log(err);
