@@ -37,6 +37,14 @@ const PostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    reports: [
+      {
+        reason: {
+          type: String,
+          required: true,
+        }
+      },
+    ],
   },
   {
     timestamps: true,

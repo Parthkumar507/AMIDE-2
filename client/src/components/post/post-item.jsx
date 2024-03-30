@@ -28,6 +28,7 @@ import moment from "moment";
 import { DeletePostModal } from "../modals/delete-post";
 import { EditPostModel } from "../modals/edit-post-model";
 import { socket } from "../../utils/socket";
+import ReportPostModal from "../modals/report-post-modal";
 
 const PostItem = ({ post }) => {
   const user = isLoggedIn();
@@ -217,6 +218,7 @@ const PostItem = ({ post }) => {
             <Icon as={IoBookmarkOutline} mr={2} />
             <Text fontSize="9pt">Save</Text>
           </Flex> */}
+          
             {user && (user.isAdmin || user?.userId === post?.user?._id) && (
               <Flex
                 align="center"
@@ -239,6 +241,18 @@ const PostItem = ({ post }) => {
                 as={"button"}
               >
                 <DeletePostModal postId={post?._id} />
+              </Flex>
+            )}
+            {user  && (
+              <Flex
+                align="center"
+                p="8px 10px"
+                borderRadius={4}
+                _hover={{ bg: "gray.200" }}
+                cursor="pointer"
+                as={"button"}
+              >
+                <ReportPostModal postId={post?._id} />
               </Flex>
             )}
           </Flex>

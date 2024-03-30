@@ -15,5 +15,6 @@ router.delete("/:id", verifyToken, posts.deletePost);
 router.put("/:id", verifyToken, posts.updatePost);
 router.post("/:postId/upvote", verifyToken, posts.upvotePost);
 router.post("/:postId/downvote", verifyToken, posts.downvotePost);
+router.post('/report',verifyToken,posts.reportPost)
 
 module.exports = router;

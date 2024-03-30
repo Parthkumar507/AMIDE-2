@@ -51,7 +51,7 @@ export const Homepage = () => {
           as={Box}
           textAlign={"center"}
           spacing={{ base: 8, md: 14 }}
-          py={{ base: 16, md: 28 }}
+          py={{ base: 16, md: 20 }}
         >
           <Heading
             fontWeight={600}
@@ -90,7 +90,7 @@ export const Homepage = () => {
           </Stack>
         </Stack>
       </Container>
-      <Box py={{ base: 10, md: 24 }} px={{ base: 4, md: 16 }}>
+      <Box py={{ base: 10, md: 0.5 }} px={{ base: 4, md: 16 }}>
         <Heading
           fontWeight={600}
           fontSize={{ base: "3xl", sm: "3xl", md: "5xl" }}

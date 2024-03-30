@@ -240,6 +240,30 @@ const downvotePost = async (req, res) => {
   }
 };
 
+const reportPost=async(req,res)=>{
+  try{
+    // const postId = req.params.postId;
+    const { postId,reason } = req.body;
+    console.log('req.body is ',req.body)
+    console.log('postId is ',postId)
+
+    // Find the post by postId
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      console.log('Post is ',post)
+      return res.status(404).json({ error: "Post not found" });
+    }
+    // Add the report to the post's reports array
+    post.reports.push({ reason });
+    await post.save();
+    return res.status(200).json({ message: "Post reported successfully" });
+
+  }catch(err){
+
+  }
+}
+
 module.exports = {
   createPost,
   getPosts,
@@ -250,4 +274,5 @@ module.exports = {
   searchPosts,
   upvotePost,
   downvotePost,
+  reportPost
 };

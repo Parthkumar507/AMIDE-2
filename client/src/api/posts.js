@@ -1,6 +1,9 @@
+import { json } from "react-router-dom";
 import { BASE_URL } from "../config";
 import { isLoggedIn } from "../utils/auth";
 import { socket } from "../utils/socket";
+
+
 
 const createPost = async (post) => {
   try {
@@ -100,6 +103,30 @@ const deletePost = async (postId) => {
     console.log(err);
   }
 };
+import axios from 'axios'
+const reportPost = async (postId, reason) => {
+  try {
+    const user = isLoggedIn();
+    if (!user) {
+      return new Error("User not logged in");
+    }
+    // postId=post._id
+    const res = await fetch(BASE_URL + "api/posts/report" , {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-access-token": user.token,
+      },
+      body:JSON.stringify({ postId, reason }), 
+    });
+    return res.json();
+  } catch (err) {
+    console.log(post)
+    // console.log(err);
+    return { error: "Failed to report post. Please try again later." };
+  }
+};
 
 const downvotePost = async (postId, user) => {
   try {
@@ -126,4 +153,5 @@ export {
   updatePost,
   upvotePost,
   downvotePost,
+  reportPost
 };
