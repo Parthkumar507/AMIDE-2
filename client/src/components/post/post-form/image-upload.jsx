@@ -19,14 +19,14 @@ const ImageUpload = ({
 
     if (files && files.length > 0) {
       const file = files[0];
-      const preset = "caxbcy1y"; 
+      const preset = "eilja4kt"; 
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", preset);
 
       try {
         const response = await fetch(
-          `https://api.cloudinary.com/v1_1/dvdn0fbf6/image/upload`,
+          `https://api.cloudinary.com/v1_1/dwrhgui7p/image/upload`,
           {
             method: "POST",
             body: formData,
@@ -53,7 +53,7 @@ const ImageUpload = ({
     if (imagePublicId) {
       const cld = new Cloudinary({
         cloud: {
-          cloudName: "dvdn0fbf6",
+          cloudName: "dwrhgui7p",
         },
       });
 

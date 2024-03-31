@@ -3,14 +3,16 @@ const cors = require("cors");
 const http = require("http");
 const app = express();
 const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
+const socketIo = require("socket.io");
+const passport = require("passport");
+
 const connect = require("./utils/connect");
 const users = require("./routes/user.route");
 const posts = require("./routes/post.route");
 const community = require("./routes/community.route");
 const comment = require("./routes/comment.route");
-const bodyParser = require("body-parser");
-const socketIo = require("socket.io");
-const passport = require("passport");
+
 const passportStrategy = require("./passport");
 
 dotenv.config();
