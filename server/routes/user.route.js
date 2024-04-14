@@ -28,8 +28,10 @@ router.get(
     session: false,
   }),
   function (req, res) {
+    console.log('0')
     const token = jwt.sign(buildToken(req.user), process.env.TOKEN_KEY);
     if (req.query.origin) {
+      console.log('1')
       res.redirect(
         `${BASE_URL}/#user=${JSON.stringify({
           token,
@@ -40,6 +42,8 @@ router.get(
         })}`
       );
     } else {
+      console.log('2')
+      console.log(req.user)
       res.redirect(
         `${BASE_URL}/#user=${JSON.stringify({
           token,
