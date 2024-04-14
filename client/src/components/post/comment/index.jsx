@@ -29,16 +29,31 @@ const Comments = ({ user, post }) => {
   }, [post]);
 
   const onCreateComment = async () => {
-    const data = await createComment(post?._id, {
-      content: comment,
-    });
-    if (data) {
-      toast.success("Comment created successfully!");
-      navigate(0);
-    } else {
-      toast.error("Comment created failed!");
+    try {
+      const data = await createComment(post?._id, {
+        content: comment,
+      });
+      console.log("Data from createComment:", data);
+      if (data.error === "Toxic Comment") 
+      {
+        // console.log('00002')
+
+        toast.error("Toxic comment detected. Please revise your comment.");
+      }
+      else if (data) {
+        console.log('00000')
+        toast.success("Comment created successfully!");
+        navigate(0);
+      } else {
+        console.log('00001')
+        toast.error("Comment creation failed!");
+      }
+    } catch (error) {
+      // Handle specific error conditions
+        toast.error("Failed to create comment. Please try again later.");
     }
   };
+
 
   return (
     <Box bg="white" pt={4} borderRadius="0px 0px 4px 4px">

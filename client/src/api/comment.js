@@ -1,4 +1,5 @@
 import { isLoggedIn } from "../utils/auth";
+import toast from "react-hot-toast";
 
 const { BASE_URL } = require("../config");
 
@@ -17,9 +18,30 @@ const createComment = async (postId, data) => {
       },
       body: JSON.stringify(data),
     });
-    return await res.json();
+    if (res.status==400) {
+      return ({ message: "Toxic comment detected", error: "Toxic Comment" });
+
+    }
+    const responseData = await res.json();
+   
+    console.log(responseData)
+    if (res.status === 200) {
+      // Check if the comment is toxic
+      if (responseData.toxic) {
+        toast.error("Toxic comment detected. Please revise your comment.");
+      } else {
+        toast.success("Comment created successfully!");
+      }
+    } else {
+      throw new Error("Failed to create comment");
+    }
+
+    return responseData;
   } catch (err) {
+    console.log('02')
     console.log(err);
+    console.log('03')
+  
   }
 };
 
