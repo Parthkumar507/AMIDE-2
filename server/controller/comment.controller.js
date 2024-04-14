@@ -1,5 +1,6 @@
 const Comment = require("../model/comment.model");
 const Post = require("../model/post.model");
+const axios = require("axios");
 
 const createComment = async (req, res) => {
   try {
@@ -15,11 +16,31 @@ const createComment = async (req, res) => {
     if (!post.comments) {
       post.comments = [];
     }
+      // Now, send a request to localhost:5000
+      const response2 = await axios.post("http://localhost:5000/classify", {
+        text:content,
+      });
+  
+      // Handle the response from localhost:5000
+      console.log("Response from localhost:5000:", response2.data.result);
+      console.log('0')
+
+      if(response2.data.result=='The sentence is toxic.'){
+        console.log('1')
+        error='Toxic Comment'
+        return res.status(400).json({ message: "Toxic comment detected", error: "Toxic Comment" });
+
+      }
+      console.log('2')
+  
+
+
     const comment = await Comment.create({
       content,
       parent: parentId,
       post: postId,
       commentedBy: userId,
+      hateScore:response2.data.result
     });
 
     await comment.save();
@@ -30,9 +51,16 @@ const createComment = async (req, res) => {
       path: "commentedBy",
       select: "-password",
     });
+
+
+
     res
       .status(200)
       .json({ message: "Comment added successfully", comment: comment });
+
+
+
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });

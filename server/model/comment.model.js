@@ -17,6 +17,9 @@ const commentSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    hateScore:{
+      type:String,
+    },
     parent: {
       type: mongoose.Types.ObjectId,
       ref: "comment",
@@ -27,6 +30,7 @@ const commentSchema = new mongoose.Schema(
         ref: "comment",
       },
     ],
+
     upvotedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,
