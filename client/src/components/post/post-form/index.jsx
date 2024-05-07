@@ -66,7 +66,10 @@ export const PostForm = () => {
       communityId: community,
     });
     console.log('Image Url is ',selectedFile)
-    if (!data.error) {
+    if(data.error=="Insincere Post"){
+      toast.error(data.message);
+    }
+    else if (!data.error) {
       toast.success("Post created successfully!");
       navigate(`/explore`);
     } else {

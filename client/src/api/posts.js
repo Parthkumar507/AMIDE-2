@@ -20,6 +20,10 @@ const createPost = async (post) => {
       },
       body: JSON.stringify(post),
     });
+    if (res.status==400) {
+      return ({ message: "Insincere Post detected", error: "Insincere Post" });
+
+    }
     return await res.json();
   } catch (err) {
     console.log(err);

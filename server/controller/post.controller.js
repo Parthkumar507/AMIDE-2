@@ -1,5 +1,6 @@
 const Post = require("../model/post.model");
 const Community = require("../model/community.model");
+const axios = require("axios");
 
 const createPost = async (req, res) => {
   try {
@@ -15,6 +16,35 @@ const createPost = async (req, res) => {
     if (!community) {
       return res.status(404).json({ message: "community not found" });
     }
+    console.log('Before calling Flask API');
+    // Now, send a request to localhost:5000
+    // try
+    // {
+      const response2 = await axios.post("http://localhost:5000/classifyInsincere", {
+        text:content,
+        });
+        // console.log(response2)
+
+    // }
+    // catch(err) {
+    //   print(err)
+    // }
+    // response
+    console.log('Response from Flask API:', response2.data);
+
+    // Handle the response from localhost:5000
+    // console.log("Response from localhost:5000:", response2.data.result);
+    console.log('0')
+
+    if(response2.data.result=='The sentence is Insincere.'){
+      console.log('1')
+      error='Insincere Post'
+      return res.status(400).json({ message: "Insincere Post detected", error: "Insincere Post" });
+    }
+    // console.log('2')
+
+
+
 
     const post = await Post.create({
       title,
@@ -23,6 +53,7 @@ const createPost = async (req, res) => {
       user: userId,
       community: communityId,
       upvotedBy: [userId],
+      InsincereScore:response2.data.result
     });
 
     community.posts.push(post);

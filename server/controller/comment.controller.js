@@ -4,6 +4,7 @@ const axios = require("axios");
 
 const createComment = async (req, res) => {
   try {
+    console.log('1111111111111111111')
     const { content, parentId } = req.body;
     const postId = req.params.postId;
     const userId = req.user.userId;
@@ -17,7 +18,7 @@ const createComment = async (req, res) => {
       post.comments = [];
     }
       // Now, send a request to localhost:5000
-      const response2 = await axios.post("http://localhost:5000/classify", {
+      const response2 = await axios.post("http://localhost:5000/classifyHate", {
         text:content,
       });
   
