@@ -29,15 +29,15 @@ export const RegisterPage = () => {
       return;
     }
     if (form.password.length<8) {
-      toast.error("Password should not be less than 8")
+      toast.error("Minimum Password length is 8")
       return;
     }
     if (form.username.length<4) {
-      toast.error("Username should not be less than 4")
+      toast.error("Minimum Username length is 4")
       return;
     }
     if (form.username.length>30) {
-      toast.error("Username should not be greater than 30")
+      toast.error("Username length should not be greater than 30")
       return;
     }
     const { success, data, error }  = await register(form);

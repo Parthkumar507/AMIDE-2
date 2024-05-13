@@ -3,23 +3,30 @@ import axios from 'axios';
 import { BASE_URL } from "../config";
 import toast from "react-hot-toast";
 import {Layout} from "../components/layout/index"
-import { Box, Flex,Heading,Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Spinner } from '@chakra-ui/react';
+import AllReportPosts from '../components/Report_Posts';
+
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userIsAdmin, setuserIsAdmin] = useState(null);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem('user')).user._id;
         console.log('UserId ',userId)
+        const userIsAdmin = JSON.parse(localStorage.getItem('user')).user.isAdmin;
+        console.log('UserIsAdmin ',userIsAdmin)
 
 
         // Make an API call to fetch user information
         const response = await axios.get(`${BASE_URL}api/auth/profile/${userId}`); 
         setUserData(response.data);
         setLoading(false);
+        setuserIsAdmin(userIsAdmin)
       } catch (error) {
         console.error('Error fetching user data:', error);
         toast.error('Something went wrong')
@@ -30,8 +37,9 @@ const ProfilePage = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
+    <Flex justify="center" align="center" h="100%">
+    <Spinner size="xl" color="blue.500" />
+  </Flex>  }
   return (  
     <Layout>
       <Flex justify="center" align="center" h="100%">
@@ -56,6 +64,10 @@ const ProfilePage = () => {
           )}
         </Box>
       </Flex>
+          {userIsAdmin && 
+            <AllReportPosts/>
+          }
+
     </Layout>
   );
 };

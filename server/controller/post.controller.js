@@ -295,6 +295,29 @@ const reportPost=async(req,res)=>{
   }
 }
 
+const getAllReportPost=async(req,res)=>{
+  try {
+    // Using setTimeout
+
+    const posts = await Post.find({ reports: { $exists: true, $ne: [] } });
+
+      // Modify the response to include only necessary fields
+  const modifiedPosts = posts.map(({ _id: postId, content, reports }) => ({
+    postId,
+    content,
+    reports
+  }));
+
+
+    res.json(modifiedPosts);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+
 module.exports = {
   createPost,
   getPosts,
@@ -305,5 +328,6 @@ module.exports = {
   searchPosts,
   upvotePost,
   downvotePost,
-  reportPost
+  reportPost,
+  getAllReportPost
 };

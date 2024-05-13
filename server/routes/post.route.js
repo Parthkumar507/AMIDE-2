@@ -5,6 +5,8 @@ const { verifyToken } = require("../middleware/auth");
 
 router.post("/", verifyToken, posts.createPost);
 router.get("/", posts.getPosts);
+router.get('/getallReportpost',posts.getAllReportPost)
+
 router.get("/:id", posts.getPostById);
 
 router.get("/search/searched", posts.searchPosts);
@@ -16,5 +18,6 @@ router.put("/:id", verifyToken, posts.updatePost);
 router.post("/:postId/upvote", verifyToken, posts.upvotePost);
 router.post("/:postId/downvote", verifyToken, posts.downvotePost);
 router.post('/report',verifyToken,posts.reportPost)
+
 
 module.exports = router;
