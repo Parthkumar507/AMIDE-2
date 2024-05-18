@@ -77,7 +77,7 @@ export const ExplorePage = () => {
   }, [sortType, socket, posts]);
 
   return (
-    <Layout>
+    <Layout >
       <SecondaryLayout>
         <>
           {user ? <CreatePostBtn handleSort={handleSort} /> : null}

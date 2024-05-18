@@ -6,6 +6,7 @@ import {
   MenuItem,
   MenuList,
   Select,
+  Alert, AlertIcon, Box
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { BiPoll } from "react-icons/bi";
@@ -43,6 +44,7 @@ export const PostForm = () => {
   const selectFileRef = useRef(null);
   const [communities, setCommunities] = useState([]);
   const navigate = useNavigate();
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
 
   useEffect(() => {
     getCommunities().then((data) => {
@@ -70,7 +72,11 @@ export const PostForm = () => {
       toast.error(data.message);
     }
     else if (!data.error) {
-      toast.success("Post created successfully!");
+      setShowSuccessAnimation(true);
+      // toast.success("Post created successfully!");
+      setTimeout(() => {
+        navigate(`/explore`);
+      }, 3000);
       navigate(`/explore`);
     } else {
       toast.error("Post failed to create!");
@@ -133,6 +139,12 @@ export const PostForm = () => {
 
         
       </Flex>
+      {showSuccessAnimation && (
+        <Alert status="success" borderRadius="md" boxShadow="md">
+          <AlertIcon />
+          Post created successfully!
+        </Alert>
+      )}
     </>
   );
 };

@@ -4,7 +4,7 @@ import { Box, Flex } from "@chakra-ui/react";
 const SecondaryLayout = ({ children, maxWidth }) => {
   return (
     <Flex justify="center" p="16px 0px">
-      <Flex width="95%" justify="center" maxWidth={maxWidth || "860px"}>
+      <Flex marginLeft="19%" width="95%" justify="center" maxWidth={maxWidth || "860px"}>
         <Flex
           direction="column"
           width={{ base: "100%", md: "65%" }}

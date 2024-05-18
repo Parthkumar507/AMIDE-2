@@ -14,6 +14,7 @@ import { getCommunities, onJoinLeaveCommunity } from "../../api/communities";
 import { Link } from "react-router-dom";
 import { FaConnectdevelop } from "react-icons/fa";
 import { isLoggedIn } from "../../utils/auth";
+import communityLogo from "../../assests/communityLogo.png" 
 
 export const TopCommunities = () => {
   const user = isLoggedIn();
@@ -98,11 +99,14 @@ export const TopCommunities = () => {
                             mr={2}
                           />
                         ) : (
-                          <Icon
-                            as={FaConnectdevelop}
-                            fontSize={30}
-                            color="brand.100"
-                            mr={2}
+                          <Image
+                            src={communityLogo}
+                            alt="Image"
+                            // boxSize="20px" 
+                            width="70px"
+                            height="60px"
+                            // color="brand.100" 
+                            // mr={2}
                           />
                         )}
                         <span

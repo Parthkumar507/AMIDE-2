@@ -10,37 +10,14 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { BsLink45Deg } from "react-icons/bs";
-import { FaReddit } from "react-icons/fa";
-import { IoImageOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  sortByLatest,
-  sortByLikes,
-  sortByComments,
-} from "../../redux/sortingSlice";
+import { FaPen } from "react-icons/fa"; // Import the icon you want to use
+import {  InputGroup, InputLeftElement } from "@chakra-ui/react";
 
 export const CreatePostBtn = ({ handleSort }) => {
   const navigate = useNavigate();
 
-  const [sortBy, setSortBy] = useState("Sort By")
-
-  // const dispatch = useDispatch();
-  // const handleSort = (sortType) => {
-  //   switch (sortType) {
-  //     case 'latest':
-  //       dispatch(sortByLatest());
-  //       break;
-  //     case 'likes':
-  //       dispatch(sortByLikes());
-  //       break;
-  //     case 'comments':
-  //       dispatch(sortByComments());
-  //       break;
-  //     default:
-  //       break;
-  //   }}
+  const [sortBy, setSortBy] = useState("Sort By");
 
   return (
     <Flex
@@ -48,13 +25,19 @@ export const CreatePostBtn = ({ handleSort }) => {
       align="center"
       bg="white"
       height="56px"
-      borderRadius={4}
+      borderRadius={8} // Round border
       border="1px solid"
       borderColor="gray.300"
       p={2}
       mb={4}
     >
-      {/* <Icon as={FaReddit} fontSize={36} color="gray.300" mr={4} /> */}
+    <InputGroup width="65%">
+    <InputLeftElement
+      pointerEvents="none"
+      color="gray.400"
+      fontSize="1.2em"
+      children={<FaPen />} // Use the icon component here
+    />
       <Input
         placeholder="Create Post"
         fontSize="10pt"
@@ -73,34 +56,21 @@ export const CreatePostBtn = ({ handleSort }) => {
         bg="gray.50"
         borderColor="gray.200"
         height="36px"
-        borderRadius={4}
+        borderRadius={4} // Round border
         mr={4}
         onClick={() => navigate("/submit")}
+        // textColor={"red"}
+        // width={"55%"}
       />
-      {/* <Icon
-        as={IoImageOutline}
-        fontSize={24}
-        mr={4}
-        color="gray.400"
-        cursor="pointer"
-      />
-      <Icon as={BsLink45Deg} fontSize={24} color="gray.400" cursor="pointer" /> */}
-      <Menu
-        bg="gray.50"
-        borderColor="gray.200"
-        height="36px"
-        _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-      >
+      </InputGroup>
+
+      <Menu>
         {({ isOpen }) => (
           <>
             <MenuButton
               fontSize="10pt"
               border="1px solid"
-              borderRadius={4}
+              borderRadius={4} // Round border
               bg="gray.50"
               borderColor="gray.200"
               height="36px"
@@ -112,26 +82,19 @@ export const CreatePostBtn = ({ handleSort }) => {
               isActive={isOpen}
               as={Button}
               rightIcon={<ChevronDownIcon />}
-              minW={36}
+              // minW={30}
+              width={"25%"}
             >
               {sortBy}
             </MenuButton>
-            <MenuList>
-              <MenuItem fontSize="10pt" onClick={() => {setSortBy("Latest"); handleSort("createdAt")}}>
+            <MenuList bg="gray.50">
+              <MenuItem fontSize="10pt" onClick={() => { setSortBy("Latest"); handleSort("createdAt") }}>
                 Latest
               </MenuItem>
-              <MenuItem
-                fontSize="10pt"
-                as={"button"}
-                onClick={() => {setSortBy("Likes"); handleSort("upvotedBy")}}
-              >
+              <MenuItem fontSize="10pt" onClick={() => { setSortBy("Likes"); handleSort("upvotedBy") }}>
                 Likes
               </MenuItem>
-              <MenuItem
-                fontSize="10pt"
-                as={"button"}
-                onClick={() =>{setSortBy("Comments"); handleSort("commentCount")}}
-              >
+              <MenuItem fontSize="10pt" onClick={() => { setSortBy("Comments"); handleSort("commentCount") }}>
                 Comments
               </MenuItem>
             </MenuList>

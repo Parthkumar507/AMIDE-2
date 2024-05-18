@@ -54,6 +54,9 @@ export const CreateCommunityButton = () => {
         }}
         fontSize={"10pt"}
         onClick={handleOpen}
+        marginLeft={"50px"}
+        marginRight={"50px"}
+
       >
         Create Community
       </Button>
